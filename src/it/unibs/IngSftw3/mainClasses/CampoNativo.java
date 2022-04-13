@@ -83,4 +83,6 @@ public class CampoNativo {
         return obbligatoria;
     }
 
+
+
 }

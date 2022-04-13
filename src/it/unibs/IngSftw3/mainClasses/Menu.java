@@ -12,7 +12,7 @@ public class Menu {
     final private static String VOCE_USCITA = "0\tEsci";
     final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata : ";
     final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri"};
-    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema"};
+    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto"};
     public static final int ZERO = 0;
     public static final int UNO = 1;
 
@@ -117,7 +117,7 @@ public class Menu {
      * Metodo per la gestione del menu del fruitore
      * @param conf la configurazione su cui opera il fruitore
      */
-    public void MenuFruitore(Configurazione conf){
+    public void MenuFruitore(Configurazione conf,Utente f,Offerte offerte){
         int rispostaFruitore;
         this.setVoci(VOCI_Fruitore);
         do {
@@ -131,6 +131,12 @@ public class Menu {
                     else{
                         System.out.println(conf.getParametri().toStringParametri());
                     }
+                    break;
+                case 2:
+                    Offerta off=new Offerta();
+                    off.creaOfferta(conf.getSis());
+
+
                     break;
                 default:
                     break;

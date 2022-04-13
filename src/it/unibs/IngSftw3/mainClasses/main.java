@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class main {
 
@@ -40,7 +41,8 @@ public class main {
             param=ParametriScambi.inserimentoParametri();
         }
         Configurazione conf=new Configurazione(sistema,param);
-
+        HashMap <Fruitore, ArrayList<Offerta>> of=new HashMap<>();
+        Offerte offerte=new Offerte(of);
         if(acceduto instanceof Configuratore){
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};
@@ -51,7 +53,7 @@ public class main {
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};
             Menu m=new Menu(titolo,voci);
-            m.MenuFruitore(conf);
+            m.MenuFruitore(conf, acceduto, offerte);
         }
 
        /* ArrayList<String> luoghi=new ArrayList<String>();
