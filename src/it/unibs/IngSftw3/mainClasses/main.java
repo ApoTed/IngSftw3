@@ -37,12 +37,18 @@ public class main {
         if(fileSistema.exists() && !fileSistema.isDirectory()) {
             sistema= XmlReader.readSis("sistema.xml");
         }
-        if(!parametriFatti){
+        if(!parametriFatti && acceduto instanceof Configuratore){
             param=ParametriScambi.inserimentoParametri();
         }
         Configurazione conf=new Configurazione(sistema,param);
-        HashMap <Fruitore, ArrayList<Offerta>> of=new HashMap<>();
-        Offerte offerte=new Offerte(of);
+
+        ArrayList <Offerta> listaOff=new ArrayList<>();
+
+        File fileOfferte = new File("offerte.xml");
+        if(fileOfferte.exists() && !fileOfferte.isDirectory()) {
+            listaOff.addAll(XmlReader.leggiOfferte("offerte.xml").getListaOfferte());
+        }
+        Offerte offerte=new Offerte(listaOff);
         if(acceduto instanceof Configuratore){
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};
@@ -53,7 +59,7 @@ public class main {
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};
             Menu m=new Menu(titolo,voci);
-            m.MenuFruitore(conf, acceduto, offerte);
+            m.MenuFruitore(conf, (Fruitore) acceduto, offerte);
         }
 
        /* ArrayList<String> luoghi=new ArrayList<String>();
@@ -68,6 +74,8 @@ public class main {
         System.out.println(p.toStringParametri());
         */
         System.out.println("\nFINE PROGRAMMA");
+        if(offerte.getListaOfferte().size()!=0)
+            XmlWriter.salvaOfferte(offerte, "offerte.xml");
         XmlWriter.salvaParametri(conf.getParametri(),"parametriSalvati.xml");
         if(conf.getSis().getListaGerarchie().size()!=0){
             XmlWriter.salvaSistema(conf.getSis(), "sistema.xml");

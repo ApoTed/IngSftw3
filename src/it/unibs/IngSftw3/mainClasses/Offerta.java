@@ -1,23 +1,28 @@
 package it.unibs.IngSftw3.mainClasses;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Offerta {
 
     private String nomeCategoria;
     private HashMap <CampoNativo, String> compliazioni=new HashMap<>();
-    private StatoOfferta stato;
+    private StatoOfferta statoAttuale;
+    private ArrayList <StatoOfferta> statiPassati=new ArrayList<>();
+    private String nomeFruitore;
 
-    public Offerta( String _nomeCategoria, HashMap <CampoNativo, String> _compilazioni,StatoOfferta _stato){
+    public Offerta( String _nomeCategoria, HashMap <CampoNativo, String> _compilazioni,StatoOfferta _statoAttuale,String _nomeFruitore,ArrayList<StatoOfferta> _statiPassati ){
         this.nomeCategoria=_nomeCategoria;
         this.compliazioni=_compilazioni;
-        this.stato=_stato;
+        this.statoAttuale=_statoAttuale;
+        this.nomeFruitore=_nomeFruitore;
+        this.statiPassati=_statiPassati;
     }
 
     public Offerta() {
     }
 
-    public boolean creaOfferta(Sistema s){
+    public boolean creaOfferta(Sistema s,String nome){
         boolean successo=false;
         System.out.println(s.toStringSistema());
         boolean continua=true;
@@ -26,9 +31,11 @@ public class Offerta {
             String n=Utilita.leggiStringaNonVuota("Inserisci il nome della categoria doce vuoi pubblicare il tuo articolo: ");
             Categoria c=s.findCategoria(n,ger);
             if(c!=null){
+                this.nomeCategoria=c.getNome();
                 this.compilaCampi(c);
-                this.stato=StatoOfferta.APERTA;
-
+                this.statoAttuale=StatoOfferta.APERTA;
+                this.nomeFruitore=nome;
+                this.statiPassati=new ArrayList<StatoOfferta>();
                 continua=false;
             }
             else{
@@ -59,4 +66,23 @@ public class Offerta {
         System.out.println("Fine compilazione campi");
     }
 
+    public ArrayList<StatoOfferta> getStatiPassati() {
+        return statiPassati;
+    }
+
+    public String getNomeCategoria() {
+        return nomeCategoria;
+    }
+
+    public HashMap<CampoNativo, String> getCompliazioni() {
+        return compliazioni;
+    }
+
+    public StatoOfferta getStatoAttuale() {
+        return statoAttuale;
+    }
+
+    public String getNomeFruitore() {
+        return nomeFruitore;
+    }
 }

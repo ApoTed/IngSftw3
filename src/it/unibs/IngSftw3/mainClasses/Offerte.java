@@ -1,26 +1,19 @@
 package it.unibs.IngSftw3.mainClasses;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Offerte {
-    private HashMap<Fruitore, ArrayList<Offerta>> offerteAccoppiate=new HashMap<>();
+    private ArrayList<Offerta> listaOfferte= new ArrayList<Offerta>();
 
-    public Offerte(HashMap<Fruitore, ArrayList<Offerta>> _offerteAccoppiate) {
-        this.offerteAccoppiate=_offerteAccoppiate;
+    public Offerte( ArrayList<Offerta> _offerteAccoppiate) {
+        this.listaOfferte=_offerteAccoppiate;
     }
-    public void addOffertaAunFruitore(Fruitore f, Offerta o){
-        ArrayList <Offerta> temp=new ArrayList<>();
-        if(this.offerteAccoppiate.containsKey(f)){
-            temp.addAll(this.offerteAccoppiate.get(f));
-            temp.add(o);
-            this.offerteAccoppiate.replace(f, temp);
-        }
-        else{
-            temp.add(o);
-            this.offerteAccoppiate.put(f,temp);
-        }
+    public void addOffertaAunFruitore( Offerta o){
+        this.listaOfferte.add(o);
+    }
 
+    public ArrayList<Offerta> getListaOfferte() {
+        return listaOfferte;
     }
 }
 

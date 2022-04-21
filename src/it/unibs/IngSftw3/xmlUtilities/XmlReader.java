@@ -10,6 +10,7 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -325,7 +326,8 @@ public class XmlReader {
         } catch (Exception e) {
             System.out.println("Errore nell'inizializzazione del reader:");
             System.out.println(e.getMessage());
-        }String piazza = null;
+        }
+        String piazza = null;
         ArrayList <String> luoghi=new ArrayList<>();
         ArrayList <Giorno> giorni=new ArrayList<>();
 
@@ -475,6 +477,181 @@ public class XmlReader {
         }
         ParametriScambi par=new ParametriScambi(piazza,luoghi, giorni,valli,scadenza);
         return par;
+    }
+    public static Offerte leggiOfferte(String filename) throws XMLStreamException {
+        XMLInputFactory xmlif = null;
+        XMLStreamReader xmlr = null;
+        //inizialiazzo il reader
+        try {
+            xmlif = XMLInputFactory.newInstance();
+            xmlr = xmlif.createXMLStreamReader(filename, new FileInputStream(filename));
+        } catch (Exception e) {
+            System.out.println("Errore nell'inizializzazione del reader:");
+            System.out.println(e.getMessage());
+        }
+        ArrayList <Offerta> listOfferte=new ArrayList<>();
+        while(xmlr.hasNext()){
+            if(xmlr.isStartElement() && xmlr.getLocalName().equals("offerte")){
+                boolean fineOfferte=false;
+                while(!fineOfferte){
+                    if(xmlr.isStartElement() && xmlr.getLocalName().equals("offerta")){
+                        String nomeCategoria="";
+                        StatoOfferta statoAttuale = null;
+                        ArrayList<StatoOfferta> statiPassati=new ArrayList<>();
+                        String nomeFruitore="";
+                        HashMap <CampoNativo,String> compilazioni=new HashMap<>();
+                        boolean fineOfferta=false;
+                        while(!fineOfferta){
+                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("nomeCategoria")){
+                                boolean fineNomeCat=false;
+                                while(!fineNomeCat){
+                                    if(xmlr.isCharacters()){
+                                        nomeCategoria=xmlr.getText();
+                                    }
+                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("nomeCategoria"))
+                                        fineNomeCat=true;
+                                    if(!fineNomeCat)
+                                        xmlr.next();
+                                }
+                            }
+                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("statoAttuale")) {
+                                boolean fineStatoAttuale=false;
+                                while(!fineStatoAttuale){
+                                    if(xmlr.isCharacters()){
+                                        statoAttuale=StatoOfferta.getStatoFromString(xmlr.getText());
+                                    }
+                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("statoAttuale"))
+                                        fineStatoAttuale=true;
+                                    if(!fineStatoAttuale)
+                                        xmlr.next();
+                                }
+                            }
+                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("nomeFruitore")){
+                                boolean fineFruitore=false;
+                                while (!fineFruitore){
+                                    if(xmlr.isCharacters()){
+                                        nomeFruitore=xmlr.getText();
+                                    }
+                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("nomeFruitore"))
+                                        fineFruitore=true;
+                                    if(!fineFruitore)
+                                        xmlr.next();
+                                }
+                            }
+                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("compilazioni")){
+                                boolean fineCompilazioni=false;
+                                while(!fineCompilazioni){
+                                    if(xmlr.isStartElement() && xmlr.getLocalName().equals("compilazione")){
+                                        boolean fineCompiazione=false;
+                                        String nomeCampo="";
+                                        boolean obbligoCampo=false;
+                                        String descrizione="";
+                                        while(!fineCompiazione){
+                                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("campoNativo")){
+                                                boolean fineCampo=false;
+                                                while(!fineCampo){
+
+                                                    if(xmlr.isStartElement() && xmlr.getLocalName().equals("nomeCampo")){
+                                                        boolean fineNomeCampo=false;
+                                                        while(!fineNomeCampo){
+                                                            if(xmlr.isCharacters()){
+                                                                nomeCampo=xmlr.getText();
+                                                            }
+                                                            if(xmlr.isEndElement() && xmlr.getLocalName().equals("nomeCampo"))
+                                                                fineNomeCampo=true;
+                                                            if(!fineNomeCampo)
+                                                                xmlr.next();
+                                                        }
+                                                    }
+                                                    if(xmlr.isStartElement() && xmlr.getLocalName().equals("obbligoCampo")){
+                                                        boolean fineObbligo=false;
+                                                        while(!fineObbligo){
+                                                            if(xmlr.isCharacters()){
+                                                                if(xmlr.getText().equals("true")){
+                                                                    obbligoCampo=true;
+                                                                }
+                                                            }
+                                                            if(xmlr.isEndElement()  && xmlr.getLocalName().equals("obbligoCampo"))
+                                                                fineObbligo=true;
+                                                            if(!fineObbligo)
+                                                                xmlr.next();
+                                                        }
+                                                    }
+
+                                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("campoNativo"))
+                                                        fineCampo=true;
+                                                    if(!fineCampo)
+                                                        xmlr.next();
+                                                }
+                                            }
+                                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("compilazioneInserita")){
+                                                boolean fineInserita=false;
+                                                while(!fineInserita){
+                                                    if(xmlr.isCharacters()){
+                                                        descrizione=xmlr.getText();
+                                                    }
+                                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("compilazioneInserita"))
+                                                        fineInserita=true;
+                                                    if(!fineInserita)
+                                                        xmlr.next();
+                                                }
+                                            }
+                                            if(xmlr.isEndElement() && xmlr.getLocalName().equals("compilazione")) {
+                                                fineCompiazione = true;
+                                                compilazioni.put(new CampoNativo(nomeCampo, obbligoCampo), descrizione);
+                                            }
+                                            if(!fineCompiazione)
+                                                xmlr.next();
+                                        }
+                                    }
+                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("compilazioni"))
+                                        fineCompilazioni=true;
+                                    if(!fineCompilazioni)
+                                        xmlr.next();
+                                }
+                            }
+                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("statiPassati")){
+                                boolean fineStati=false;
+                                while(!fineStati){
+                                    if(xmlr.isStartElement() && xmlr.getLocalName().equals("statoPassato")){
+                                        boolean fineStato=false;
+                                        while(!fineStato){
+                                            if(xmlr.isCharacters()){
+                                                statiPassati.add(StatoOfferta.getStatoFromString(xmlr.getText()));
+                                            }
+                                            if(xmlr.isEndElement() && xmlr.getLocalName().equals("statoPassato"))
+                                                fineStato=true;
+                                            if(!fineStato)
+                                                xmlr.next();
+                                        }
+                                    }
+                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("statiPassati"))
+                                        fineStati=true;
+                                    if(!fineStati)
+                                        xmlr.next();
+                                }
+                            }
+                            if(xmlr.isEndElement() && xmlr.getLocalName().equals("offerta")) {
+                                fineOfferta = true;
+                                Offerta of = new Offerta(nomeCategoria, compilazioni, statoAttuale, nomeFruitore, statiPassati);
+                                listOfferte.add(of);
+                            }
+                            if(!fineOfferta){
+                                xmlr.next();
+                            }
+                        }
+                    }
+                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("offerte"))
+                        fineOfferte=true;
+                    if ((!fineOfferte)){
+                        xmlr.next();
+                    }
+                }
+            }
+            xmlr.next();
+        }
+        Offerte ofs=new Offerte(listOfferte);
+        return ofs;
     }
 }
 

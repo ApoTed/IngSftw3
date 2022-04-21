@@ -54,7 +54,7 @@ public class XmlWriter {
                     Element descrizione =document.createElement("descrizione");
                     categoria.appendChild(descrizione);
                     descrizione.appendChild(document.createTextNode(x.getDescrizione()));
-                    int countCampo=0;
+
                     //campi nativi
                     Element campiNativi=document.createElement("campiNativi");
                     categoria.appendChild(campiNativi);
@@ -79,8 +79,6 @@ public class XmlWriter {
                         else {
                             obbligoCampo.appendChild(document.createTextNode("false"));
                         }
-                        countCampo++;
-
                     }
                     //padre categoria
                     Element padre=document.createElement("categoriaPadre");
@@ -219,6 +217,81 @@ public class XmlWriter {
             transformer2.transform(input, output);
 
         }catch(ParserConfigurationException | TransformerConfigurationException e){
+
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void salvaOfferte(Offerte offerte, String filename){
+        try{
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+
+            Element listaOfferte=document.createElement("offerte");
+            document.appendChild(listaOfferte);
+
+            for(Offerta x : offerte.getListaOfferte() ){
+                Element offerta=document.createElement("offerta");
+                listaOfferte.appendChild(offerta);
+
+                Element nomeCategoria=document.createElement("nomeCategoria");
+                offerta.appendChild(nomeCategoria);
+                nomeCategoria.appendChild(document.createTextNode(x.getNomeCategoria()));
+
+                Element statoAttuale= document.createElement("statoAttuale");
+                offerta.appendChild(statoAttuale);
+                statoAttuale.appendChild(document.createTextNode(x.getStatoAttuale().toStringStato()));
+
+                Element nomeFruitore=document.createElement("nomeFruitore");
+                offerta.appendChild(nomeFruitore);
+                nomeFruitore.appendChild(document.createTextNode(x.getNomeFruitore()));
+
+                Element compilazioni=document.createElement("compilazioni");
+                offerta.appendChild(compilazioni);
+
+                for(CampoNativo c: x.getCompliazioni().keySet()){
+                    Element compilazione = document.createElement("compilazione");
+                    compilazioni.appendChild(compilazione);
+                    //campoNativo
+                    Element campoNativo=document.createElement("campoNativo");
+                    compilazione.appendChild(campoNativo);
+
+                    //nome campo nativo
+                    Element nomeCampo=document.createElement("nomeCampo");
+                    campoNativo.appendChild(nomeCampo);
+                    nomeCampo.appendChild(document.createTextNode(c.getNomeCampo()));
+
+                    //obbligo descrzione campo
+                    Element obbligoCampo=document.createElement("obbligoCampo");
+                    campoNativo.appendChild(obbligoCampo);
+                    if(c.isObbligatoria()){
+                        obbligoCampo.appendChild(document.createTextNode("true"));
+                    }
+                    else {
+                        obbligoCampo.appendChild(document.createTextNode("false"));
+                    }
+                    Element compilazioneInserita=document.createElement("compilazioneInserita");
+                    compilazione.appendChild(compilazioneInserita);
+                    compilazioneInserita.appendChild(document.createTextNode(x.getCompliazioni().get(c)));
+
+                    Element statiPassati=document.createElement("statiPassati");
+                    offerta.appendChild(statiPassati);
+
+                    for(StatoOfferta s:x.getStatiPassati()){
+                        Element st=document.createElement("statoPassato");
+                        statiPassati.appendChild(st);
+                        st.appendChild(document.createTextNode(s.toStringStato()));
+                    }
+                }
+
+            }
+            Transformer transformer2 = TransformerFactory.newInstance().newTransformer();
+            Result output = new StreamResult(new File(filename));
+            Source input = new DOMSource(document);
+            transformer2.transform(input, output);
+        }catch(TransformerConfigurationException | ParserConfigurationException e){
 
         } catch (TransformerException e) {
             e.printStackTrace();

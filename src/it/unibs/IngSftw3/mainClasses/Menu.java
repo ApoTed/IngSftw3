@@ -117,7 +117,7 @@ public class Menu {
      * Metodo per la gestione del menu del fruitore
      * @param conf la configurazione su cui opera il fruitore
      */
-    public void MenuFruitore(Configurazione conf,Utente f,Offerte offerte){
+    public void MenuFruitore(Configurazione conf,Fruitore f,Offerte offerte){
         int rispostaFruitore;
         this.setVoci(VOCI_Fruitore);
         do {
@@ -133,10 +133,16 @@ public class Menu {
                     }
                     break;
                 case 2:
-                    Offerta off=new Offerta();
-                    off.creaOfferta(conf.getSis());
-
-
+                    if(conf.getParametri()!=null){
+                        if(conf.getSis().getListaGerarchie().size()>0){
+                            Offerta off=new Offerta();
+                            off.creaOfferta(conf.getSis(), f.getUsername());
+                            offerte.addOffertaAunFruitore(off);
+                        }
+                    }
+                    else{
+                        System.out.println("L'applicazione non è stata settata dal configuratore quindi non puoi pubblicare offerte per ora");
+                    }
                     break;
                 default:
                     break;
