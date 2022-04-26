@@ -496,12 +496,25 @@ public class XmlReader {
                 while(!fineOfferte){
                     if(xmlr.isStartElement() && xmlr.getLocalName().equals("offerta")){
                         String nomeCategoria="";
+                        String nomeRad="";
                         StatoOfferta statoAttuale = null;
                         ArrayList<StatoOfferta> statiPassati=new ArrayList<>();
                         String nomeFruitore="";
                         HashMap <CampoNativo,String> compilazioni=new HashMap<>();
                         boolean fineOfferta=false;
                         while(!fineOfferta){
+                            if(xmlr.isStartElement() && xmlr.getLocalName().equals("nomeRadice")){
+                                boolean fineRad=false;
+                                while(!fineRad){
+                                    if(xmlr.isCharacters()){
+                                        nomeRad=xmlr.getText();
+                                    }
+                                    if(xmlr.isEndElement() && xmlr.getLocalName().equals("nomeRadice"))
+                                        fineRad=true;
+                                    if(!fineRad)
+                                        xmlr.next();
+                                }
+                            }
                             if(xmlr.isStartElement() && xmlr.getLocalName().equals("nomeCategoria")){
                                 boolean fineNomeCat=false;
                                 while(!fineNomeCat){
@@ -633,7 +646,7 @@ public class XmlReader {
                             }
                             if(xmlr.isEndElement() && xmlr.getLocalName().equals("offerta")) {
                                 fineOfferta = true;
-                                Offerta of = new Offerta(nomeCategoria, compilazioni, statoAttuale, nomeFruitore, statiPassati);
+                                Offerta of = new Offerta(nomeCategoria, compilazioni, statoAttuale, nomeFruitore, statiPassati, nomeRad);
                                 listOfferte.add(of);
                             }
                             if(!fineOfferta){

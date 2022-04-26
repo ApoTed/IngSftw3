@@ -6,17 +6,19 @@ import java.util.HashMap;
 public class Offerta {
 
     private String nomeCategoria;
+    private String nomeRadice;
     private HashMap <CampoNativo, String> compliazioni=new HashMap<>();
     private StatoOfferta statoAttuale;
     private ArrayList <StatoOfferta> statiPassati=new ArrayList<>();
     private String nomeFruitore;
 
-    public Offerta( String _nomeCategoria, HashMap <CampoNativo, String> _compilazioni,StatoOfferta _statoAttuale,String _nomeFruitore,ArrayList<StatoOfferta> _statiPassati ){
+    public Offerta( String _nomeCategoria, HashMap <CampoNativo, String> _compilazioni,StatoOfferta _statoAttuale,String _nomeFruitore,ArrayList<StatoOfferta> _statiPassati, String _nomeRadice ){
         this.nomeCategoria=_nomeCategoria;
         this.compliazioni=_compilazioni;
         this.statoAttuale=_statoAttuale;
         this.nomeFruitore=_nomeFruitore;
         this.statiPassati=_statiPassati;
+        this.nomeRadice=_nomeRadice;
     }
 
     public Offerta() {
@@ -31,6 +33,7 @@ public class Offerta {
             String n=Utilita.leggiStringaNonVuota("Inserisci il nome della categoria doce vuoi pubblicare il tuo articolo: ");
             Categoria c=s.findCategoria(n,ger);
             if(c!=null){
+                this.nomeRadice=s.getListaGerarchie().get(ger-1).getRadice().getNome();
                 this.nomeCategoria=c.getNome();
                 this.compilaCampi(c);
                 this.statoAttuale=StatoOfferta.APERTA;
@@ -64,6 +67,10 @@ public class Offerta {
             }
         }
         System.out.println("Fine compilazione campi");
+    }
+
+    public String getNomeRadice() {
+        return nomeRadice;
     }
 
     public ArrayList<StatoOfferta> getStatiPassati() {

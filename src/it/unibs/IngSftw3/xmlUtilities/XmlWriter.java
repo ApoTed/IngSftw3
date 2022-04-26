@@ -236,6 +236,10 @@ public class XmlWriter {
                 Element offerta=document.createElement("offerta");
                 listaOfferte.appendChild(offerta);
 
+                Element nomeRadice=document.createElement("nomeRadice");
+                offerta.appendChild(nomeRadice);
+                nomeRadice.appendChild(document.createTextNode(x.getNomeRadice()));
+
                 Element nomeCategoria=document.createElement("nomeCategoria");
                 offerta.appendChild(nomeCategoria);
                 nomeCategoria.appendChild(document.createTextNode(x.getNomeCategoria()));
