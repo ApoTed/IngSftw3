@@ -12,7 +12,7 @@ public class Menu {
     final private static String VOCE_USCITA = "0\tEsci";
     final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata : ";
     final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri"};
-    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente"};
+    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte "};
     public static final int ZERO = 0;
     public static final int UNO = 1;
 
@@ -136,8 +136,9 @@ public class Menu {
                     if(conf.getParametri()!=null){
                         if(conf.getSis().getListaGerarchie().size()>0){
                             Offerta off=new Offerta();
-                            off.creaOfferta(conf.getSis(), f.getUsername());
-                            offerte.addOffertaAunFruitore(off);
+                            boolean notNull=off.creaOfferta(conf.getSis(), f.getUsername());
+                            if(notNull)
+                                offerte.addOffertaAunFruitore(off);
                         }
                     }
                     else{
@@ -145,7 +146,8 @@ public class Menu {
                     }
                     break;
                 case 3:
-                    Offerte offerteFruitore= new Offerte(offerte.getOfferteAperteFromFruitore(f.getUsername()));
+                    Offerte offerteFruitore= new Offerte(offerte.getOfferteFromFruitore(f.getUsername()));
+                    offerteFruitore.togliRitirate();
                     if(offerteFruitore.getListaOfferte().size()>0){
                         Offerta toChange=offerteFruitore.scegliOfferta();
                         int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta alttrimenti 0",0,1);
@@ -158,7 +160,10 @@ public class Menu {
                         System.out.println("non ci sono offerte ritirabili");
                     }
 
-
+                    break;
+                case 4:
+                    Offerte offerteFruitoreToSee=new Offerte(offerte.getOfferteFromFruitore(f.getUsername()));
+                    System.out.println(offerteFruitoreToSee.toStringOfferte());
                 default:
                     break;
 

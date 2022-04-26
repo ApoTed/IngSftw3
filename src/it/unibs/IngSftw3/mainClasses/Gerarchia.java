@@ -273,4 +273,40 @@ public class Gerarchia {
         }
         return esiste;
     }
+
+    public ArrayList<Categoria> listaFoglie(){
+        ArrayList <Categoria> foglie=new ArrayList<>();
+        ArrayList <Categoria> dads=new ArrayList<>();
+        dads=this.listaPadri();
+        for(Categoria c: this.ramo.keySet()){
+            if(!dads.contains(c)){
+                foglie.add(c);
+            }
+        }
+        return foglie;
+    }
+
+    /**
+     * restituisce true se è un figlio altrimenti false;
+     * @param toCheck Categoria da controllare
+     * @return
+     */
+    public boolean isFoglia(Categoria toCheck){
+        boolean answer=false;
+        if(this.listaFoglie().contains(toCheck)){
+            answer=true;
+        }
+        return answer;
+    }
+
+
+    public ArrayList<Categoria> listaPadri(){
+        ArrayList <Categoria> padri=new ArrayList<>();
+        for(Categoria c: this.ramo.keySet()){
+            if(!padri.contains(this.ramo.get(c))){
+                padri.add(this.ramo.get(c));
+            }
+        }
+        return padri;
+    }
 }

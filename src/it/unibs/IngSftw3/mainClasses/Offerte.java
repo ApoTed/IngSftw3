@@ -15,10 +15,10 @@ public class Offerte {
     public ArrayList<Offerta> getListaOfferte() {
         return listaOfferte;
     }
-    public ArrayList<Offerta> getOfferteAperteFromFruitore(String nomeFruiotore){
+    public ArrayList<Offerta> getOfferteFromFruitore(String nomeFruiotore){
         ArrayList <Offerta> toReturn=new ArrayList<>();
         for(Offerta o: this.listaOfferte){
-            if(o.getNomeFruitore().equals(nomeFruiotore) && o.getStatoAttuale()==StatoOfferta.APERTA){
+            if(o.getNomeFruitore().equals(nomeFruiotore)){
                 toReturn.add(o);
             }
         }
@@ -48,6 +48,17 @@ public class Offerte {
         temp.cambiaStato();
         this.listaOfferte.remove(indice);
         this.listaOfferte.add(temp);
+    }
+
+    public void togliRitirate(){
+        ArrayList <Offerta> temp=new ArrayList<>();
+        for(Offerta o: this.listaOfferte){
+            if(o.getStatoAttuale()==StatoOfferta.APERTA.APERTA){
+                temp.add(o);
+            }
+        }
+        this.listaOfferte.clear();
+        this.listaOfferte.addAll(temp);
     }
 }
 
