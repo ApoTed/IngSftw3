@@ -73,6 +73,23 @@ public class Offerta {
         return nomeRadice;
     }
 
+    public String toStringCompilazioni(){
+        StringBuffer stb = new StringBuffer();
+        for(CampoNativo c: compliazioni.keySet()){
+            stb.append(c.getNomeCampo() + ": " + compliazioni.get(c) + "\n");
+        }
+        return stb.toString();
+    }
+
+    public String toStringOfferta(){
+        StringBuffer stb = new StringBuffer();
+        stb.append("Categoria: " + this.getNomeCategoria()+"\n");
+        stb.append(this.toStringCompilazioni()+"\n");
+        stb.append("Stato dell'offerta: " + this.getStatoAttuale().toStringStato());
+        stb.append("Autore offerta: " + this.getNomeFruitore());
+        return stb.toString();
+    }
+
     public ArrayList<StatoOfferta> getStatiPassati() {
         return statiPassati;
     }
