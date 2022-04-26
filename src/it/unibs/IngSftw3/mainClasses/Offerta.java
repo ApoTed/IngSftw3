@@ -69,6 +69,11 @@ public class Offerta {
         System.out.println("Fine compilazione campi");
     }
 
+    public void cambiaStato(){
+        this.statiPassati.add(this.statoAttuale);
+        this.statoAttuale=StatoOfferta.RITIRATA;
+    }
+
     public String getNomeRadice() {
         return nomeRadice;
     }
@@ -76,17 +81,17 @@ public class Offerta {
     public String toStringCompilazioni(){
         StringBuffer stb = new StringBuffer();
         for(CampoNativo c: compliazioni.keySet()){
-            stb.append(c.getNomeCampo() + ": " + compliazioni.get(c) + "\n");
+            stb.append("\t"+c.getNomeCampo() + ": " + compliazioni.get(c) + "\n");
         }
         return stb.toString();
     }
 
     public String toStringOfferta(){
         StringBuffer stb = new StringBuffer();
-        stb.append("Categoria: " + this.getNomeCategoria()+"\n");
+        stb.append(" Categoria: " + this.getNomeCategoria()+"\n");
         stb.append(this.toStringCompilazioni()+"\n");
-        stb.append("Stato dell'offerta: " + this.getStatoAttuale().toStringStato());
-        stb.append("Autore offerta: " + this.getNomeFruitore());
+        stb.append("\tStato dell'offerta: " + this.getStatoAttuale().toStringStato());
+        stb.append("\tAutore offerta: " + this.getNomeFruitore()+"\n");
         return stb.toString();
     }
 
@@ -109,4 +114,5 @@ public class Offerta {
     public String getNomeFruitore() {
         return nomeFruitore;
     }
+
 }

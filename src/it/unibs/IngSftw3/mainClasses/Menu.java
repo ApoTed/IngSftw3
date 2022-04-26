@@ -12,7 +12,7 @@ public class Menu {
     final private static String VOCE_USCITA = "0\tEsci";
     final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata : ";
     final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri"};
-    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto"};
+    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente"};
     public static final int ZERO = 0;
     public static final int UNO = 1;
 
@@ -144,6 +144,21 @@ public class Menu {
                         System.out.println("L'applicazione non è stata settata dal configuratore quindi non puoi pubblicare offerte per ora");
                     }
                     break;
+                case 3:
+                    Offerte offerteFruitore= new Offerte(offerte.getOfferteAperteFromFruitore(f.getUsername()));
+                    if(offerteFruitore.getListaOfferte().size()>0){
+                        Offerta toChange=offerteFruitore.scegliOfferta();
+                        int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta alttrimenti 0",0,1);
+                        if(sceltaSicura==1){
+                            offerte.modificaOffertaEsistente(toChange);
+                            System.out.println("Offerta ritirata correttamente");
+                        }
+                    }
+                    else{
+                        System.out.println("non ci sono offerte ritirabili");
+                    }
+
+
                 default:
                     break;
 

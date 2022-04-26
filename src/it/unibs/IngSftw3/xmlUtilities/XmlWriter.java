@@ -280,14 +280,14 @@ public class XmlWriter {
                     compilazione.appendChild(compilazioneInserita);
                     compilazioneInserita.appendChild(document.createTextNode(x.getCompliazioni().get(c)));
 
-                    Element statiPassati=document.createElement("statiPassati");
-                    offerta.appendChild(statiPassati);
+                }
+                Element statiPassati=document.createElement("statiPassati");
+                offerta.appendChild(statiPassati);
 
-                    for(StatoOfferta s:x.getStatiPassati()){
-                        Element st=document.createElement("statoPassato");
-                        statiPassati.appendChild(st);
-                        st.appendChild(document.createTextNode(s.toStringStato()));
-                    }
+                for(StatoOfferta s:x.getStatiPassati()){
+                    Element st=document.createElement("statoPassato");
+                    statiPassati.appendChild(st);
+                    st.appendChild(document.createTextNode(s.toStringStato()));
                 }
 
             }
