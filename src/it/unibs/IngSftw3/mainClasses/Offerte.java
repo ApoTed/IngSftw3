@@ -28,7 +28,7 @@ public class Offerte {
         StringBuffer s=new StringBuffer();
         int count=0;
         for(Offerta o:this.listaOfferte){
-            s.append(count +") " );
+            s.append("\n"+count +") " );
             s.append(o.toStringOfferta());
             count++;
         }
@@ -75,20 +75,20 @@ public class Offerte {
         return ret;
     }
 
-    public void stampaOfferte(Configurazione conf){
+    public void stampaOfferteFoglia(Configurazione conf){
         Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
-        if(categoriaFoglia[0] == null){
-            System.out.println("Visualizzazione annullata");
-        }
-
-        Offerte tosee=this.offerteFoglia(categoriaFoglia[0].getNome());
-
-        if(tosee.getListaOfferte().size()!=0){
-            System.out.println("Le offerte di questa categoria sono: ");
-            System.out.println(tosee.toStringOfferte());
+        if(categoriaFoglia[0] != null){
+            Offerte tosee=this.offerteFoglia(categoriaFoglia[0].getNome());
+            if(tosee.getListaOfferte().size()!=0){
+                System.out.println("Le offerte di questa categoria sono: ");
+                System.out.println(tosee.toStringOfferte());
+            }
+            else{
+                System.out.println("non ci sono offerte aperte realtive a questa categoria");
+            }
         }
         else{
-            System.out.println("non ci sono offerte aperte realtive a questa categoria");
+            System.out.println("Visualizzazione offerte fallita");
         }
     }
 

@@ -40,6 +40,7 @@ public class Offerta {
                 this.nomeFruitore=nome;
                 this.statiPassati=new ArrayList<StatoOfferta>();
                 continua=false;
+                successo=true;
             }
             else{
                 int temp=Utilita.leggiIntero("La categoria inserita non esiste, se vuoi riprovare premi 1 altrimenti 0",0,1);
@@ -89,9 +90,9 @@ public class Offerta {
     public String toStringOfferta(){
         StringBuffer stb = new StringBuffer();
         stb.append(" Categoria: " + this.getNomeCategoria()+"\n");
-        stb.append(this.toStringCompilazioni()+"\n");
+        stb.append(this.toStringCompilazioni());
         stb.append("\tStato dell'offerta: " + this.getStatoAttuale().toStringStato());
-        stb.append("\tAutore offerta: " + this.getNomeFruitore()+"\n");
+        stb.append("\n\tAutore offerta: " + this.getNomeFruitore()+"\n");
         return stb.toString();
     }
 

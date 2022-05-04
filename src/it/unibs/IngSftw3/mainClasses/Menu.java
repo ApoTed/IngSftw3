@@ -106,21 +106,7 @@ public class Menu {
                     conf.getParametri().modificaParametri();
                     break;
                 case 4:
-                    Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
-                    if(categoriaFoglia[0] == null){
-                        System.out.println("Visualizzazione annullata");
-                        break;
-                    }
-                    Offerte tosee=offerte.offerteFoglia(categoriaFoglia[0].getNome());
-
-                    if(tosee.getListaOfferte().size()!=0){
-                        System.out.println("Le offerte di questa categoria sono: ");
-                        System.out.println(tosee.toStringOfferte());
-                    }
-                    else{
-                        System.out.println("non ci sono offerte aperte realtive a questa categoria");
-                    }
-
+                    offerte.stampaOfferteFoglia(conf);
                     break;
                 default:
                     break;
@@ -183,21 +169,7 @@ public class Menu {
                     System.out.println(offerteFruitoreToSee.toStringOfferte());
                     break;
                 case 5:
-                    Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
-                    if(categoriaFoglia[0] == null){
-                        System.out.println("Visualizzazione annullata");
-                        break;
-                    }
-                    Offerte tosee=offerte.offerteFoglia(categoriaFoglia[0].getNome());
-
-                    if(tosee.getListaOfferte().size()!=0){
-                        System.out.println("Le offerte di questa categoria sono: ");
-                        System.out.println(tosee.toStringOfferte());
-                    }
-                    else{
-                        System.out.println("non ci sono offerte aperte realtive a questa categoria");
-                    }
-
+                    offerte.stampaOfferteFoglia(conf);
                     break;
                 default:
                     break;
