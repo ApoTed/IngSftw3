@@ -1,9 +1,17 @@
 package it.unibs.IngSftw3.mainClasses;
 
+/**
+ * enum per la gestione degli stati dell'offerta
+ * @ author Jacopo Tedeschi, Enrico Zambelli
+ */
 public enum StatoOfferta {
     RITIRATA,
     APERTA;
 
+    /**
+     * metodo che restituisce la stringa che descrive lo stato
+     * @return stringa che descrive lo stato
+     */
     public String toStringStato(){
         String s=null;
         if(this== RITIRATA){
@@ -14,6 +22,12 @@ public enum StatoOfferta {
         }
         return s;
     }
+
+    /**
+     * metodo che restituisce lo stato dell'offerta da una stringa che descrive lo stato
+     * @param stato stringa che descrive lo stato
+     * @return
+     */
     public static StatoOfferta getStatoFromString(String stato){
         if(stato.equals("ritirata")){
             return RITIRATA;

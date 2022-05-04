@@ -122,6 +122,11 @@ public class Sistema {
         return str.toString();
     }
 
+    /**
+     * metodo per sceglie un offerta foglia
+     * @return una array di Categoria contente all'indice 0 la categoria foglia scelta
+     * e all'indice 1 la categoria radice realtiva alla categoria foglia scelta, se la selezione fallisce retunr null ad entrambi gli indici
+     */
     public Categoria [] scegliFoglia() {
         Categoria[] questaRadice = new Categoria[2];
         int count = 0;

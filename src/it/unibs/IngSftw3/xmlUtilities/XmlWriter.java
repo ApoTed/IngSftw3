@@ -223,6 +223,11 @@ public class XmlWriter {
         }
     }
 
+    /**
+     * metodo per salvare le offerte in un file xml
+     * @param offerte offerte da salvare
+     * @param filename nome del file xml in cui salvare
+     */
     public static void salvaOfferte(Offerte offerte, String filename){
         try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();

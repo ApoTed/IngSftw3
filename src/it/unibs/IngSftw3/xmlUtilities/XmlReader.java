@@ -316,6 +316,12 @@ public class XmlReader {
         return dati;
     }
 
+    /**
+     * metodo per la lettura dei paramentri degli scambi
+     * @param filename nome file xml contente i dati
+     * @return ParametriScambi che erano salvati in filename
+     * @throws XMLStreamException
+     */
     public static ParametriScambi leggiParametri(String filename) throws XMLStreamException {
         XMLInputFactory xmlif = null;
         XMLStreamReader xmlr = null;
@@ -478,6 +484,13 @@ public class XmlReader {
         ParametriScambi par=new ParametriScambi(piazza,luoghi, giorni,valli,scadenza);
         return par;
     }
+
+    /**
+     * metodo le la lettur adelle offerte salvate nel fil xml
+     * @param filename nome file xml
+     * @return Offerte contenente le ooferte che erano salvate in filename
+     * @throws XMLStreamException
+     */
     public static Offerte leggiOfferte(String filename) throws XMLStreamException {
         XMLInputFactory xmlif = null;
         XMLStreamReader xmlr = null;
