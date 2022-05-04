@@ -107,10 +107,13 @@ public class Menu {
                     break;
                 case 4:
                     Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
-                    System.out.println("Le offerte di questa categoria sono: ");
+                    if(categoriaFoglia[0] == null){
+                        System.out.println("Visualizzazione annullata");
+                        break;
+                    }
                     Offerte tosee=offerte.offerteFoglia(categoriaFoglia[0].getNome());
-                    tosee.togliRitirate();
-                    if(tosee.getListaOfferte().size()==0){
+
+                    if(tosee.getListaOfferte().size()!=0){
                         System.out.println("Le offerte di questa categoria sono: ");
                         System.out.println(tosee.toStringOfferte());
                     }
@@ -164,7 +167,7 @@ public class Menu {
                     offerteFruitore.togliRitirate();
                     if(offerteFruitore.getListaOfferte().size()>0){
                         Offerta toChange=offerteFruitore.scegliOfferta();
-                        int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta alttrimenti 0",0,1);
+                        int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta altrimenti 0",0,1);
                         if(sceltaSicura==1){
                             offerte.modificaOffertaEsistente(toChange);
                             System.out.println("Offerta ritirata correttamente");
@@ -181,16 +184,20 @@ public class Menu {
                     break;
                 case 5:
                     Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
-                    System.out.println("Le offerte di questa categoria sono: ");
+                    if(categoriaFoglia[0] == null){
+                        System.out.println("Visualizzazione annullata");
+                        break;
+                    }
                     Offerte tosee=offerte.offerteFoglia(categoriaFoglia[0].getNome());
-                    tosee.togliRitirate();
-                    if(tosee.getListaOfferte().size()==0){
+
+                    if(tosee.getListaOfferte().size()!=0){
                         System.out.println("Le offerte di questa categoria sono: ");
                         System.out.println(tosee.toStringOfferte());
                     }
                     else{
                         System.out.println("non ci sono offerte aperte realtive a questa categoria");
                     }
+
                     break;
                 default:
                     break;

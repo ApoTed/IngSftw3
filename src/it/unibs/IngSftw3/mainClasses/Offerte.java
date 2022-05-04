@@ -69,8 +69,28 @@ public class Offerte {
             }
         }
         Offerte ret=new Offerte(toRet);
-        ret.togliRitirate();
+        if(!toRet.isEmpty()){
+            ret.togliRitirate();
+        }
         return ret;
     }
+
+    public void stampaOfferte(Configurazione conf){
+        Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
+        if(categoriaFoglia[0] == null){
+            System.out.println("Visualizzazione annullata");
+        }
+
+        Offerte tosee=this.offerteFoglia(categoriaFoglia[0].getNome());
+
+        if(tosee.getListaOfferte().size()!=0){
+            System.out.println("Le offerte di questa categoria sono: ");
+            System.out.println(tosee.toStringOfferte());
+        }
+        else{
+            System.out.println("non ci sono offerte aperte realtive a questa categoria");
+        }
+    }
+
 }
 

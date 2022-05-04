@@ -140,7 +140,7 @@ public class Sistema {
             System.out.println(f.toStringCategoria());
             countF++;
         }
-        int sceltaFoglia = Utilita.leggiIntero("Inserisci il numero della categoria, se nessuna ti va bene premi 0 e si annulla la creazione dell'offerta: ", 0, foglie.size());
+        int sceltaFoglia = Utilita.leggiIntero("Inserisci il numero della categoria, se nessuna ti va bene premi 0 e si annulla l'operazione corrente: ", 0, foglie.size());
         if(sceltaFoglia!=0){
             questaRadice[0]=foglie.get(sceltaFoglia-1);
             questaRadice[1]=this.listaGerarchie.get(sceltaGer).getRadice();

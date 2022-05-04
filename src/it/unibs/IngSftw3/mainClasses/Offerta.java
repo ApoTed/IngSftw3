@@ -26,23 +26,23 @@ public class Offerta {
 
     public boolean creaOfferta(Sistema s,String nome){
         boolean successo=false;
-        //System.out.println(s.toStringSistema());
+        System.out.println(s.toStringSistema());
         boolean continua=true;
         do{
-                Categoria [] questRadice=new Categoria[2];
-                questRadice=s.scegliFoglia();
-            if(questRadice[0]!=null){
-                this.nomeRadice=questRadice[1].getNome();
-                this.nomeCategoria=questRadice[0].getNome();
-                this.compilaCampi(questRadice[0]);
+            int ger=Utilita.leggiIntero("inserisci il numero della gerarchia dove si trova la categoria scelta",1,s.getListaGerarchie().size());
+            String n=Utilita.leggiStringaNonVuota("Inserisci il nome della categoria doce vuoi pubblicare il tuo articolo: ");
+            Categoria c=s.findCategoria(n,ger);
+            if(c!=null){
+                this.nomeRadice=s.getListaGerarchie().get(ger-1).getRadice().getNome();
+                this.nomeCategoria=c.getNome();
+                this.compilaCampi(c);
                 this.statoAttuale=StatoOfferta.APERTA;
                 this.nomeFruitore=nome;
                 this.statiPassati=new ArrayList<StatoOfferta>();
                 continua=false;
-                successo=true;
             }
             else{
-                int temp=Utilita.leggiIntero("La creazione dell'offerta è stato annullata, se vuoi riprovare premi 1 altrimenti 0",0,1);
+                int temp=Utilita.leggiIntero("La categoria inserita non esiste, se vuoi riprovare premi 1 altrimenti 0",0,1);
                 if(temp==0)
                     continua=false;
             }
