@@ -53,7 +53,7 @@ public class main {
             String titolo="Benvenuto nel sistema di gestione baratti";
             String[] voci=new String[]{};
             Menu m=new Menu(titolo,voci);
-            m.MenuConfiguratore(conf);
+            m.MenuConfiguratore(conf, offerte);
         }
         if(acceduto instanceof  Fruitore){
             String titolo="Benvenuto nel sistema di gestione baratti";

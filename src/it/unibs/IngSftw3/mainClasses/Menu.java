@@ -11,8 +11,8 @@ public class Menu {
     final private static String CORNICE = "--------------------------------";
     final private static String VOCE_USCITA = "0\tEsci";
     final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata : ";
-    final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri"};
-    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte "};
+    final private static String[] VOCI_Configuratore = new String[]{"Inserimento nuova gerarchia","Visualizzazione delle gerarchie","Modifica dei parametri","Visualizza le offerte di una categoria"};
+    public static final String[] VOCI_Fruitore = new String[]{"Visualizza le radici e i parametri di sistema","Pubblicazione prodotto","Modificare una offerta già esistente","visualizza le tue offerte ","Visualizza le offerte di una categoria"};
     public static final int ZERO = 0;
     public static final int UNO = 1;
 
@@ -58,7 +58,7 @@ public class Menu {
      * Metodo per la gestione del menu del configuratore
      * @param conf la configurazione su cui opera il configuratore
      */
-    public void MenuConfiguratore(Configurazione conf){
+    public void MenuConfiguratore(Configurazione conf, Offerte offerte){
         int risposta=1;
         this.setVoci(VOCI_Configuratore);
         do {
@@ -104,6 +104,20 @@ public class Menu {
                     break;
                 case 3:
                     conf.getParametri().modificaParametri();
+                    break;
+                case 4:
+                    Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
+                    System.out.println("Le offerte di questa categoria sono: ");
+                    Offerte tosee=offerte.offerteFoglia(categoriaFoglia[0].getNome());
+                    tosee.togliRitirate();
+                    if(tosee.getListaOfferte().size()==0){
+                        System.out.println("Le offerte di questa categoria sono: ");
+                        System.out.println(tosee.toStringOfferte());
+                    }
+                    else{
+                        System.out.println("non ci sono offerte aperte realtive a questa categoria");
+                    }
+
                     break;
                 default:
                     break;
@@ -164,6 +178,20 @@ public class Menu {
                 case 4:
                     Offerte offerteFruitoreToSee=new Offerte(offerte.getOfferteFromFruitore(f.getUsername()));
                     System.out.println(offerteFruitoreToSee.toStringOfferte());
+                    break;
+                case 5:
+                    Categoria [] categoriaFoglia= conf.getSis().scegliFoglia();
+                    System.out.println("Le offerte di questa categoria sono: ");
+                    Offerte tosee=offerte.offerteFoglia(categoriaFoglia[0].getNome());
+                    tosee.togliRitirate();
+                    if(tosee.getListaOfferte().size()==0){
+                        System.out.println("Le offerte di questa categoria sono: ");
+                        System.out.println(tosee.toStringOfferte());
+                    }
+                    else{
+                        System.out.println("non ci sono offerte aperte realtive a questa categoria");
+                    }
+                    break;
                 default:
                     break;
 

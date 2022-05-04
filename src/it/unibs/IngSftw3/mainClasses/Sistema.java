@@ -130,7 +130,7 @@ public class Sistema {
             System.out.println(g.getRadice().toStringCategoria());
             count++;
         }
-        int sceltaGer = Utilita.leggiIntero("Scegli il numero rispettivo alla categoria radice alla quale la tua offerta appartiene: ", 0, this.listaGerarchie.size()-1);
+        int sceltaGer = Utilita.leggiIntero("Scegli il numero rispettivo alla categoria radice da cui vuoi partire a cercare la categoria voluta: ", 0, this.listaGerarchie.size()-1);
         boolean fineScelta = false;
         ArrayList <Categoria> foglie=this.listaGerarchie.get(sceltaGer).listaFoglie();
         int countF=1;
@@ -146,7 +146,7 @@ public class Sistema {
             questaRadice[1]=this.listaGerarchie.get(sceltaGer).getRadice();
         }
         else{
-            System.out.println("Creazione offerta annullatta");
+            System.out.println("Selezione categoria annullata");
             Categoria fake=null;
             questaRadice[0]=null;
             questaRadice[1]=null;

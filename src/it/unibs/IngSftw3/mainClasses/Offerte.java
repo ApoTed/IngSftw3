@@ -60,5 +60,17 @@ public class Offerte {
         this.listaOfferte.clear();
         this.listaOfferte.addAll(temp);
     }
+
+    public Offerte offerteFoglia(String nomeFoglia){
+        ArrayList <Offerta> toRet=new ArrayList<>();
+        for(Offerta o:this.listaOfferte){
+            if(o.getNomeCategoria().equals(nomeFoglia)){
+                toRet.add(o);
+            }
+        }
+        Offerte ret=new Offerte(toRet);
+        ret.togliRitirate();
+        return ret;
+    }
 }
 
