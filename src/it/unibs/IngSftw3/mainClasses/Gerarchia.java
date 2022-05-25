@@ -299,7 +299,10 @@ public class Gerarchia {
         return answer;
     }
 
-
+    /**
+     * Metodo che restituisce la lista delle categorie che hanno almeno un figlio
+     * @return la lista delle categorie che hanno almeno un figlio
+     */
     public ArrayList<Categoria> listaPadri(){
         ArrayList <Categoria> padri=new ArrayList<>();
         for(Categoria c: this.ramo.keySet()){

@@ -123,9 +123,9 @@ public class Sistema {
     }
 
     /**
-     * metodo per sceglie un offerta foglia
+     * Metodo per la scelta una categoria foglia
      * @return una array di Categoria contente all'indice 0 la categoria foglia scelta
-     * e all'indice 1 la categoria radice realtiva alla categoria foglia scelta, se la selezione fallisce retunr null ad entrambi gli indici
+     * e all'indice 1 la categoria radice relativa alla categoria foglia scelta, se la selezione fallisce ritorna null in entrambe le posizioni
      */
     public Categoria [] scegliFoglia() {
         Categoria[] questaRadice = new Categoria[2];

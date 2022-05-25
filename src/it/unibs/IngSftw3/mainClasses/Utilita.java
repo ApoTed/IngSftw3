@@ -80,7 +80,7 @@ public class Utilita {
     }
 
     /**
-     * Metodo per la lettura di un intero in input , con massimo e minimo
+     * Metodo per la lettura di un intero in input con massimo e minimo
      * @param messaggio il messaggio da visualizzare
      * @param minimo il minimo valore da inserire
      * @param massimo il massimo valore da inserire

@@ -11,10 +11,10 @@ public class Offerte {
 
     /**
      * costruttore della calsse
-     * @param _offerteAccoppiate arraylist delle offerte
+     * @param _listaOfferte arraylist delle offerte
      */
-    public Offerte( ArrayList<Offerta> _offerteAccoppiate) {
-        this.listaOfferte=_offerteAccoppiate;
+    public Offerte( ArrayList<Offerta> _listaOfferte) {
+        this.listaOfferte=_listaOfferte;
     }
 
     /**
