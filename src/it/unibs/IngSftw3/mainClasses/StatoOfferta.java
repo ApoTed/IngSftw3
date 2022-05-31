@@ -1,7 +1,7 @@
 package it.unibs.IngSftw3.mainClasses;
 
 /**
- * enum per la gestione degli stati dell'offerta
+ * Enum per la gestione degli stati dell'offerta
  * @ author Jacopo Tedeschi, Enrico Zambelli
  */
 public enum StatoOfferta {
@@ -9,7 +9,7 @@ public enum StatoOfferta {
     APERTA;
 
     /**
-     * metodo che restituisce la stringa che descrive lo stato
+     * Metodo che restituisce la stringa che descrive lo stato
      * @return stringa che descrive lo stato
      */
     public String toStringStato(){
@@ -24,7 +24,7 @@ public enum StatoOfferta {
     }
 
     /**
-     * metodo che restituisce lo stato dell'offerta da una stringa che descrive lo stato
+     * Metodo che restituisce lo stato dell'offerta da una stringa che descrive lo stato
      * @param stato stringa che descrive lo stato
      * @return
      */
