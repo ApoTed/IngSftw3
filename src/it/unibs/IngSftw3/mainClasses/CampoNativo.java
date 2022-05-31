@@ -67,10 +67,10 @@ public class CampoNativo {
         StringBuffer str = new StringBuffer();
         str.append(nomeCampo);
         if(obbligatoria){
-            str.append(" compliazione obbligatoria\n");
+            str.append(" compilazione obbligatoria\n");
         }
         else
-            str.append(" compliazione facoltativa\n");
+            str.append(" compilazione facoltativa\n");
         return str.toString();
     }
     //public ArrayList<String> nomiCampi(CampoNativo c)//metodo per ottenre solo la lista di nomi dei campi

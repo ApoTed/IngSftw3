@@ -154,7 +154,7 @@ public class Offerta {
      * Metodo get per la HashMap delle compilazioni
      * @return la HashMap delle compilazioni
      */
-    public HashMap<CampoNativo, String> getCompliazioni() {
+    public HashMap<CampoNativo, String> getCompilazioni() {
         return compliazioni;
     }
     /**

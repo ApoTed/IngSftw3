@@ -153,14 +153,14 @@ public class Menu {
                     offerteFruitore.togliRitirate();
                     if(offerteFruitore.getListaOfferte().size()>0){
                         Offerta toChange=offerteFruitore.scegliOfferta();
-                        int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta altrimenti 0",0,1);
+                        int sceltaSicura=Utilita.leggiIntero("Premi 1 se sei sicuro di cancellare tale offerta altrimenti 0: ",0,1);
                         if(sceltaSicura==1){
                             offerte.modificaOffertaEsistente(toChange);
                             System.out.println("Offerta ritirata correttamente");
                         }
                     }
                     else{
-                        System.out.println("non ci sono offerte ritirabili");
+                        System.out.println("Non ci sono offerte ritirabili");
                     }
 
                     break;
