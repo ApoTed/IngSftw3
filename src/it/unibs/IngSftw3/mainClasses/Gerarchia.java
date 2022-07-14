@@ -273,7 +273,10 @@ public class Gerarchia {
         }
         return esiste;
     }
-
+    /**
+     * Metodo che restituisce la lista delle foglie della gerarchia in questione
+     * @return lista delle foglie
+     */
     public ArrayList<Categoria> listaFoglie(){
         ArrayList <Categoria> foglie=new ArrayList<>();
         ArrayList <Categoria> dads=new ArrayList<>();
@@ -287,7 +290,7 @@ public class Gerarchia {
     }
 
     /**
-     * restituisce true se è un figlio altrimenti false;
+     * Metodo che restituisce true se è un figlio altrimenti false;
      * @param toCheck Categoria da controllare
      * @return
      */

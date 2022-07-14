@@ -23,8 +23,6 @@ public class Utilita {
      */
     private static Scanner creaScanner() {
         Scanner creato = new Scanner(System.in);
-        creato.useDelimiter(System.getProperty("line.separator"));
-        creato.useDelimiter("\n");
         return creato;
     }
 
@@ -35,7 +33,7 @@ public class Utilita {
      */
     public static String leggiStringa(String messaggio) {
         System.out.print(messaggio);
-        return lettore.next();
+        return lettore.nextLine().trim();
     }
 
     /**
@@ -70,6 +68,7 @@ public class Utilita {
             System.out.print(messaggio);
             try {
                 valoreLetto = lettore.nextInt();
+                lettore.nextLine();
                 finito = true;
             } catch (InputMismatchException e) {
                 System.out.println(ERRORE_FORMATO);

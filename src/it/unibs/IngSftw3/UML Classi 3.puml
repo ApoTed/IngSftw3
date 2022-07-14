@@ -96,7 +96,7 @@ class Sistema {
 +visualizzaRadici() : String
 +getListaRadici() : ArrayList<Categoria>
 +scegliFoglia() : Categoria[]
-
++isFoglia ( nomeCat : String ) : boolean
 }
 
 class Utilita {

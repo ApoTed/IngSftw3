@@ -159,5 +159,23 @@ public class Sistema {
         return questaRadice;
     }
 
+    /**
+     *Metodo per valutare se una categoria è foglia
+     * @param nomeCat nome della categoria da controllare
+     * @return true se è foglia, false altrimenti
+     */
+    public boolean isFoglia(String nomeCat){
+        ArrayList <Categoria> foglie=new ArrayList<>();
+        boolean isFoglia=false;
+        for(Gerarchia g:this.listaGerarchie){
+            foglie.addAll(g.listaFoglie());
+        }
+        for(Categoria c:foglie){
+            if(c.getNome().equals(nomeCat))
+                isFoglia=true;
+        }
+        return isFoglia;
+    }
+
 }
 
